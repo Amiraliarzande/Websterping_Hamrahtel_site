@@ -33,7 +33,7 @@ def extract_product_data(url: str, output_file: str = "output.json") -> dict:
         for block in blocks:
             color_tag = block.select_one(".mantine-rj9ps7")
             color = color_tag.text.strip() if color_tag else "نامشخص"
-
+            
             price_tag = block.select_one(".mantine-1erraa9")
             price = price_tag.text.strip() if price_tag else None
 
@@ -48,6 +48,7 @@ def extract_product_data(url: str, output_file: str = "output.json") -> dict:
                 "قیمت بدون تخفیف": old_price,
                 "تخفیف": discount
             }
+            
 
         with open(output_file, "w", encoding="utf-8") as f:
             json.dump(result, f, ensure_ascii=False, indent=2)
@@ -57,6 +58,10 @@ def extract_product_data(url: str, output_file: str = "output.json") -> dict:
 
     finally:
         driver.quit()
+
+
+
+
 
 if __name__ == "__main__":
     url = "https://hamrahtel.com/products/aura-studio-model-3-bluetooth-speaker"
